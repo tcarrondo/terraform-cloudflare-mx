@@ -45,8 +45,11 @@ No modules.
 
 | Name | Type |
 |------|------|
+| [cloudflare_email_routing_rule.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/email_routing_rule) | resource |
+| [cloudflare_email_routing_settings.this](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/email_routing_settings) | resource |
 | [cloudflare_record._dmarc](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
 | [cloudflare_record.mx](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
+| [cloudflare_record.mx_cf](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
 | [cloudflare_record.spf](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/resources/record) | resource |
 | [cloudflare_zone.domain](https://registry.terraform.io/providers/cloudflare/cloudflare/latest/docs/data-sources/zone) | data source |
 
@@ -54,6 +57,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_cloudflare_email_routings"></a> [cloudflare\_email\_routings](#input\_cloudflare\_email\_routings) | n/a | <pre>map(object({<br/>    custom_address = string<br/>    destination    = string<br/>  }))</pre> | `{}` | no |
 | <a name="input_dmarc"></a> [dmarc](#input\_dmarc) | DMARC record | `string` | `"v=DMARC1; p=none; pct=100; rua=mailto:; ruf=mailto:; sp=none; aspf=r"` | no |
 | <a name="input_domain"></a> [domain](#input\_domain) | Zone domain name | `string` | n/a | yes |
 | <a name="input_dont_create_dmarc"></a> [dont\_create\_dmarc](#input\_dont\_create\_dmarc) | Don't we need DMARC record | `bool` | `false` | no |
