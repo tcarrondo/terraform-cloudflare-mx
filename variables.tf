@@ -6,6 +6,11 @@ variable "domain" {
 variable "email_provider" {
   description = "E-mail service provider"
   type        = string
+
+  validation {
+    condition     = contains(keys(local.mx_records), var.email_provider)
+    error_message = "The email provider must be one of the following: ${join(", ", keys(local.mx_records))}."
+  }
 }
 
 variable "dont_create_spf" {
