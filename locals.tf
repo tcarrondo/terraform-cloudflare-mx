@@ -44,10 +44,25 @@ locals {
         host     = "mx4.mail.ovh.net"
       }
     }
+    cloudflare = {
+      route1 = {
+        priority = "66" # CloudFlare will manage this
+        host     = "route1.mx.cloudflare.net"
+      },
+      route2 = {
+        priority = "66" # CloudFlare will manage this
+        host     = "route2.mx.cloudflare.net"
+      },
+      route3 = {
+        priority = "66" # CloudFlare will manage this
+        host     = "route3.mx.cloudflare.net"
+      }
+    }
   }
 
   spf_record = {
-    google = "v=spf1 a mx include:_spf.google.com ~all"
-    ovh    = "v=spf1 a mx include:mx.ovh.com ~all"
+    google     = "v=spf1 a mx include:_spf.google.com ~all"
+    ovh        = "v=spf1 a mx include:mx.ovh.com ~all"
+    cloudflare = "\"v=spf1 a mx include:_spf.mx.cloudflare.net ~all\""
   }
 }

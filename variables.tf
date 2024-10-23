@@ -6,6 +6,11 @@ variable "domain" {
 variable "email_provider" {
   description = "E-mail service provider"
   type        = string
+
+  validation {
+    condition     = contains(keys(local.mx_records), var.email_provider)
+    error_message = "The email provider must be one of the following: ${join(", ", keys(local.mx_records))}."
+  }
 }
 
 variable "dont_create_spf" {
@@ -31,3 +36,12 @@ variable "dmarc" {
   type        = string
   default     = "v=DMARC1; p=none; pct=100; rua=mailto:; ruf=mailto:; sp=none; aspf=r"
 }
+
+variable "cloudflare_email_routings" {
+  type = map(object({
+    custom_address = string
+    destination    = string
+  }))
+  default = {}
+}
+
