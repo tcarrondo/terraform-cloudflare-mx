@@ -3,7 +3,7 @@ A Terraform module to configure mail configuration of a domain on a Cloudflare D
 It supports the current mail providers:
 * Google;
 * OVH;
-* ~~Cloudflare~~;
+* Cloudflare;
 * ~~Mailcow (Not a provider, but I need it)~~.
 
 ## Usage
