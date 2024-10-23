@@ -2,7 +2,7 @@
 
 resource "cloudflare_record" "mx" {
 
-  for_each = local.mx_records[var.email_provider]
+  for_each = var.email_provider != "cloudflare" ? local.mx_records[var.email_provider] : {}
 
   zone_id  = data.cloudflare_zone.domain.id
   name     = var.domain
@@ -11,6 +11,25 @@ resource "cloudflare_record" "mx" {
   priority = each.value.priority
   ttl      = 1
   proxied  = false
+}
+
+resource "cloudflare_record" "mx_cf" {
+
+  for_each = var.email_provider == "cloudflare" ? local.mx_records[var.email_provider] : {}
+
+  zone_id  = data.cloudflare_zone.domain.id
+  name     = var.domain
+  content  = each.value.host
+  type     = "MX"
+  priority = each.value.priority
+  ttl      = 1
+  proxied  = false
+
+  lifecycle {
+    ignore_changes = [
+      priority # CloudFlare will manage this
+    ]
+  }
 }
 
 # spf, dmarc (and dkim soon)

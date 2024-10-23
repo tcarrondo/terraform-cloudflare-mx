@@ -31,3 +31,12 @@ variable "dmarc" {
   type        = string
   default     = "v=DMARC1; p=none; pct=100; rua=mailto:; ruf=mailto:; sp=none; aspf=r"
 }
+
+variable "cloudflare_email_routings" {
+  type = map(object({
+    custom_address = string
+    destination    = string
+  }))
+  default = {}
+}
+
