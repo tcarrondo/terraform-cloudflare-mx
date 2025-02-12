@@ -14,7 +14,7 @@ variable "email_provider" {
 }
 
 variable "dont_create_spf" {
-  description = "Don't we need SPF record"
+  description = "Don't we need SPF record?"
   type        = bool
   default     = false
 }
@@ -26,7 +26,7 @@ variable "spf" {
 }
 
 variable "dont_create_dmarc" {
-  description = "Don't we need DMARC record"
+  description = "Don't we need DMARC record?"
   type        = bool
   default     = false
 }
@@ -35,6 +35,24 @@ variable "dmarc" {
   description = "DMARC record"
   type        = string
   default     = "v=DMARC1; p=none; pct=100; rua=mailto:; ruf=mailto:; sp=none; aspf=r"
+}
+
+variable "create_dkim" {
+  description = "Do we need DKIM record?"
+  type        = bool
+  default     = false
+}
+
+variable "dkim_selector" {
+  description = "DKIM selector"
+  type        = string
+  default     = "google"
+}
+
+variable "dkim_value" {
+  description = "DKIM value"
+  type        = string
+  default     = ""
 }
 
 variable "cloudflare_email_routings" {

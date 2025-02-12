@@ -57,3 +57,15 @@ resource "cloudflare_record" "_dmarc" {
   ttl     = 1
   proxied = false
 }
+
+resource "cloudflare_record" "dkim" {
+
+  count = var.create_dkim ? 1 : 0
+
+  zone_id = data.cloudflare_zone.domain.id
+ name    = "${var.dkim_selector}._domainkey"
+  content = var.dkim_value
+  type    = "TXT"
+  ttl     = 1
+  proxied = false
+}
