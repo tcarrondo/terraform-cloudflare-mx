@@ -1,10 +1,10 @@
 # MX record(s)
 
-resource "cloudflare_record" "mx" {
+resource "cloudflare_dns_record" "mx" {
 
   for_each = var.email_provider != "cloudflare" ? local.mx_records[var.email_provider] : {}
 
-  zone_id  = data.cloudflare_zone.domain.id
+  zone_id  = data.cloudflare_zone.domain.zone_id
   name     = var.domain
   content  = each.value.host
   type     = "MX"
@@ -13,11 +13,11 @@ resource "cloudflare_record" "mx" {
   proxied  = false
 }
 
-resource "cloudflare_record" "mx_cf" {
+resource "cloudflare_dns_record" "mx_cf" {
 
   for_each = var.email_provider == "cloudflare" ? local.mx_records[var.email_provider] : {}
 
-  zone_id  = data.cloudflare_zone.domain.id
+  zone_id  = data.cloudflare_zone.domain.zone_id
   name     = var.domain
   content  = each.value.host
   type     = "MX"
@@ -34,11 +34,11 @@ resource "cloudflare_record" "mx_cf" {
 
 # spf, dmarc (and dkim soon)
 
-resource "cloudflare_record" "spf" {
+resource "cloudflare_dns_record" "spf" {
 
   count = var.dont_create_spf ? 0 : 1
 
-  zone_id = data.cloudflare_zone.domain.id
+  zone_id = data.cloudflare_zone.domain.zone_id
   name    = var.domain
   content = var.spf != "" ? var.spf : local.spf_record[var.email_provider]
   type    = "TXT"
@@ -46,24 +46,24 @@ resource "cloudflare_record" "spf" {
   proxied = false
 }
 
-resource "cloudflare_record" "_dmarc" {
+resource "cloudflare_dns_record" "_dmarc" {
 
   count = var.dont_create_dmarc ? 0 : 1
 
-  zone_id = data.cloudflare_zone.domain.id
-  name    = "_dmarc"
+  zone_id = data.cloudflare_zone.domain.zone_id
+  name    = "_dmarc.${var.domain}"
   content = var.dmarc
   type    = "TXT"
   ttl     = 1
   proxied = false
 }
 
-resource "cloudflare_record" "dkim" {
+resource "cloudflare_dns_record" "dkim" {
 
   count = var.create_dkim ? 1 : 0
 
-  zone_id = data.cloudflare_zone.domain.id
- name    = "${var.dkim_selector}._domainkey"
+  zone_id = data.cloudflare_zone.domain.zone_id
+  name    = "${var.dkim_selector}._domainkey.${var.domain}"
   content = var.dkim_value
   type    = "TXT"
   ttl     = 1
