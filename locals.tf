@@ -1,25 +1,9 @@
 locals {
   mx_records = {
     google = {
-      aspmx = {
+      mx = {
         priority = "1"
-        host     = "aspmx.l.google.com"
-      },
-      alt1 = {
-        priority = "5"
-        host     = "alt1.aspmx.l.google.com"
-      },
-      alt2 = {
-        priority = "5"
-        host     = "alt2.aspmx.l.google.com"
-      },
-      alt3 = {
-        priority = "10"
-        host     = "alt3.aspmx.l.google.com"
-      },
-      alt4 = {
-        priority = "10"
-        host     = "alt4.aspmx.l.google.com"
+        host     = "smtp.google.com"
       }
     }
     ovh = {
