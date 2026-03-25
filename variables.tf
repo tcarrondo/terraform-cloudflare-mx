@@ -1,3 +1,8 @@
+variable "account_name" {
+  description = "Cloudflare account name where the resources will be created"
+  type        = string
+}
+
 variable "domain" {
   description = "Zone domain name"
   type        = string
@@ -62,4 +67,3 @@ variable "cloudflare_email_routings" {
   }))
   default = {}
 }
-

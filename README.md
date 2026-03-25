@@ -58,6 +58,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_account_name"></a> [account\_name](#input\_account\_name) | Cloudflare account name where the resources will be created | `string` | n/a | yes |
 | <a name="input_cloudflare_email_routings"></a> [cloudflare\_email\_routings](#input\_cloudflare\_email\_routings) | n/a | <pre>map(object({<br/>    custom_address = string<br/>    destination    = string<br/>  }))</pre> | `{}` | no |
 | <a name="input_create_dkim"></a> [create\_dkim](#input\_create\_dkim) | Do we need DKIM record? | `bool` | `false` | no |
 | <a name="input_dkim_selector"></a> [dkim\_selector](#input\_dkim\_selector) | DKIM selector | `string` | `"google"` | no |
